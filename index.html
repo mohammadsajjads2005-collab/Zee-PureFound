@@ -1,134 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Zee PureFound | Natural & Fresh Foods</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Zee PureFound – Fresh Masala</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      color: #333;
-    }
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    header {
-      background: #4b1d3f;
-      color: white;
-      padding: 20px:
-      text-align: center;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-    }
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+}
 
-    header p {
-      margin: 5px 0 0;
-      font-size: 14px;
-      opacity: 0.9;
-    }
+/* HEADER */
+header {
+  padding: 60px 20px;
+  text-align: center;
+}
 
-    .container {
-      padding: 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
+header h1 {
+  font-size: 42px;
+  margin: 0;
+  font-weight: 700;
+}
 
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
+header p {
+  font-size: 16px;
+  opacity: 0.9;
+  margin-top: 10px;
+}
 
-    .product {
-      background: white;
-      border-radius: 8px;
-      padding: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
+/* CONTAINER */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
 
-    .product img {
-      width: 100%;
-      border-radius: 6px;
-    }
+/* PRODUCTS GRID */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
 
-    .product h3 {
-      margin: 10px 0 5px;
-    }
+/* PRODUCT CARD */
+.product {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  padding: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
 
-    .product p {
-      font-size: 14px;
-      color: #555;
-    }
+.product:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
 
-    .price {
-      font-weight: bold;
-      margin: 8px 0;
-    }
+.product img {
+  width: 100%;
+  border-radius: 14px;
+}
 
-    button {
-      background: #2e7d32;
-      color: white;
-      border: none;
-      padding: 10px;
-      width: 100%;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-    }
+.product h3 {
+  margin: 12px 0 5px;
+}
 
-    button:hover {
-      background: #1b5e20;
-    }
+.product p {
+  font-size: 14px;
+  opacity: 0.85;
+}
 
-    .cart {
-      margin-top: 30px;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
+.price {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 8px 0;
+}
 
-    footer {
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 40px;
-      font-size: 13px;
-    }
-  </style>
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+  border: none;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+/* CART */
+.cart {
+  margin-top: 40px;
+  background: rgba(255,255,255,0.12);
+  padding: 20px;
+  border-radius: 18px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  font-size: 13px;
+  opacity: 0.7;
+}
+</style>
 </head>
 
 <body>
 
 <header>
   <h1>Zee PureFound</h1>
-  <p>Natural & Fresh | Traditional Taste, Modern Hygiene</p>
+  <p>Gen-Z Fresh Masala Brand • Natural • Bold • Authentic</p>
 </header>
 
 <div class="container">
 
-  <h2>Our Products</h2>
-
   <div class="products">
 
     <div class="product">
-      <img src="https://via.placeholder.com/300x300?text=Chicken+Gravy+Masala">
+      <img src="images/chicken-gravy-masala.jpg">
       <h3>Chicken Gravy Masala</h3>
-      <p>Authentic restaurant-style taste made from natural ingredients.</p>
+      <p>Rich, aromatic spices for restaurant-style chicken curry.</p>
       <div class="price">₹99</div>
       <button onclick="addToCart('Chicken Gravy Masala')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="images/paneer-masala.jpg">
+      <h3>Paneer Masala</h3>
+      <p>Creamy, bold spices made for perfect paneer dishes.</p>
+      <div class="price">₹89</div>
+      <button onclick="addToCart('Paneer Masala')">Add to Cart</button>
     </div>
 
   </div>
 
   <div class="cart">
     <h2>Your Cart</h2>
-    <div id="cart">No items added</div>
+    <div id="cart">No items yet</div>
     <br>
     <button onclick="placeOrder()">Place Order</button>
   </div>
@@ -136,29 +160,25 @@
 </div>
 
 <footer>
-  © 2026 Zee PureFound. All rights reserved.
+  © 2026 Zee PureFound • Made with ❤️ for Food Lovers
 </footer>
 
 <script>
-  let cart = [];
+let cart = [];
 
-  function addToCart(product) {
-    cart.push(product);
-    document.getElementById("cart").innerHTML = cart.join("<br>");
+function addToCart(product) {
+  cart.push(product);
+  document.getElementById("cart").innerHTML = cart.join("<br>");
+}
+
+function placeOrder() {
+  if (cart.length === 0) {
+    alert("Cart is empty");
+    return;
   }
-
-  function placeOrder() {
-    if (cart.length === 0) {
-      alert("Your cart is empty");
-      return;
-    }
-
-    let products = cart.join(", ");
-    let formLink = "https://docs.google.com/forms/d/e/1FAIpQLScJnsb5Xrjci9XIhXz-nbsleO9uEAdFpOsWfN2nbTiA6atLWQ/viewform?usp=header";
-
-    window.location.href =
-      formLink + "&entry.1234567890=" + encodeURIComponent(products);
-  }
+  let formLink = "https://docs.google.com/forms/d/e/1FAIpQLScJnsb5Xrjci9XIhXz-nbsleO9uEAdFpOsWfN2nbTiA6atLWQ/viewform?usp=header";
+  window.location.href = formLink + "&entry.1234567890=" + encodeURIComponent(cart.join(", "));
+}
 </script>
 
 </body>
