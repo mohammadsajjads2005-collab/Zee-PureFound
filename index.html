@@ -143,6 +143,8 @@ footer{text-align:center;padding:25px;font-size:13px;opacity:.7}
 <div class="container">
 <div class="products">
 
+<!-- PRODUCTS SAME AS YOURS (UNCHANGED) -->
+
 <!-- Ginger Garlic Paste -->
 <div class="product">
 <img src="ginger-garlic-paste.jpg.jpeg">
@@ -164,7 +166,7 @@ footer{text-align:center;padding:25px;font-size:13px;opacity:.7}
 <button class="add" onclick="addToCart('Ginger Garlic Paste','gg_price','gg')">Add to Cart</button>
 </div>
 
-<!-- Mutton Gravy Masala -->
+<!-- Mutton -->
 <div class="product">
 <img src="mutton-gravy-masala.jpg.jpeg">
 <h3>Mutton Gravy Masala</h3>
@@ -185,7 +187,7 @@ footer{text-align:center;padding:25px;font-size:13px;opacity:.7}
 <button class="add" onclick="addToCart('Mutton Gravy Masala','mutton_price','mutton')">Add to Cart</button>
 </div>
 
-<!-- Chicken Gravy Masala -->
+<!-- Chicken -->
 <div class="product">
 <img src="chicken-gravy-masala.jpg.jpeg">
 <h3>Chicken Gravy Masala</h3>
@@ -206,7 +208,7 @@ footer{text-align:center;padding:25px;font-size:13px;opacity:.7}
 <button class="add" onclick="addToCart('Chicken Gravy Masala','chicken_price','chicken')">Add to Cart</button>
 </div>
 
-<!-- Shahi Biryani Masala -->
+<!-- Biryani -->
 <div class="product">
 <img src="Shahi-Biryani-masala.jpg.jpeg">
 <h3>Shahi Biryani Masala</h3>
@@ -294,11 +296,12 @@ function renderCart(){
 
 function placeOrder(){
   if(cart.length===0){alert("Cart is empty");return;}
+
   let order=cart.map(i=>`${i.name} x${i.qty} = ₹${i.total}`).join(", ");
   order+=" | Total ₹"+total;
 
-  const formLink="https://docs.google.com/forms/d/e/1FAIpQLSdJ3MBmjF6705ceNPHET7VV-clxNcYODweaPxK_1RzUqyR6fA/viewform?usp=publish-editor"; // <-- replace
-  window.location.href=formLink+"&entry.1234567890="+encodeURIComponent(order);
+  const formLink="https://docs.google.com/forms/d/e/1FAIpQLSdJ3MBmjF6705ceNPHET7VV-clxNcYODweaPxK_1RzUqyR6fA/viewform?";
+  window.location.href=formLink+"&entry.2054877162="+encodeURIComponent(order);
 }
 </script>
 
