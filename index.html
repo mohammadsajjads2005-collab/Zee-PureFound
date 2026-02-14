@@ -2,121 +2,120 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Zee PureFound – Fresh Masala</title>
+<title>Zee PureFound – Premium Masala Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color:#fff;
 }
 
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: #fff;
+header{
+  text-align:center;
+  padding:60px 20px;
 }
 
-/* HEADER */
-header {
-  padding: 60px 20px;
-  text-align: center;
+header h1{
+  font-size:42px;
+  margin:0;
 }
 
-header h1 {
-  font-size: 42px;
-  margin: 0;
-  font-weight: 700;
+header p{
+  opacity:.9;
+  margin-top:10px;
 }
 
-header p {
-  font-size: 16px;
-  opacity: 0.9;
-  margin-top: 10px;
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
 }
 
-/* CONTAINER */
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
 }
 
-/* PRODUCTS GRID */
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
+.product{
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(10px);
+  border-radius:18px;
+  padding:15px;
 }
 
-/* PRODUCT CARD */
-.product {
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(10px);
-  border-radius: 18px;
-  padding: 15px;
-  transition: transform 0.3s, box-shadow 0.3s;
+.product img{
+  width:100%;
+  border-radius:14px;
 }
 
-.product:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+.product h3{
+  margin:12px 0 5px;
 }
 
-.product img {
-  width: 100%;
-  border-radius: 14px;
+.product p{
+  font-size:14px;
+  opacity:.85;
 }
 
-.product h3 {
-  margin: 12px 0 5px;
+.price{
+  font-size:18px;
+  font-weight:600;
+  margin:8px 0;
 }
 
-.product p {
-  font-size: 14px;
-  opacity: 0.85;
+.qty{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
 }
 
-.price {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 8px 0;
+.qty button{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  border:none;
+  background:#ff9800;
+  color:#fff;
+  font-size:18px;
+  cursor:pointer;
 }
 
-/* BUTTON */
-button {
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(135deg, #ff9800, #ff5722);
-  border: none;
-  border-radius: 30px;
-  font-size: 14px;
-  font-weight: 600;
-  color: white;
-  cursor: pointer;
-  transition: opacity 0.3s;
+.qty span{
+  font-size:16px;
 }
 
-button:hover {
-  opacity: 0.85;
+.add{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ff9800,#ff5722);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
 }
 
-/* CART */
-.cart {
-  margin-top: 40px;
-  background: rgba(255,255,255,0.12);
-  padding: 20px;
-  border-radius: 18px;
+.cart{
+  margin-top:40px;
+  background:rgba(255,255,255,.12);
+  padding:20px;
+  border-radius:18px;
 }
 
-footer {
-  text-align: center;
-  padding: 30px;
-  font-size: 13px;
-  opacity: 0.7;
+footer{
+  text-align:center;
+  padding:30px;
+  font-size:13px;
+  opacity:.7;
 }
 </style>
 </head>
@@ -125,59 +124,113 @@ footer {
 
 <header>
   <h1>Zee PureFound</h1>
-  <p>Gen-Z Fresh Masala Brand • Natural • Bold • Authentic</p>
+  <p>Natural • Bold • Authentic Masala</p>
 </header>
 
 <div class="container">
 
-  <div class="products">
+<div class="products">
 
-    <div class="product">
-      <img src="images/chicken-gravy-masala.jpg">
-      <h3>Chicken Gravy Masala</h3>
-      <p>Rich, aromatic spices for restaurant-style chicken curry.</p>
-      <div class="price">₹99</div>
-      <button onclick="addToCart('Chicken Gravy Masala')">Add to Cart</button>
-    </div>
+<!-- Chicken Gravy Masala -->
+<div class="product">
+<img src="C:\Users\moham\Music\OneDrive\Desktop\images\chicken-gravy-masala.jpg.jpeg">
+<h3>Chicken Gravy Masala</h3>
+<p>Restaurant-style chicken curry spices.</p>
+<div class="price">₹99</div>
+<div class="qty">
+<button onclick="changeQty('chicken',-1)">−</button>
+<span id="chicken">1</span>
+<button onclick="changeQty('chicken',1)">+</button>
+</div>
+<button class="add" onclick="addToCart('Chicken Gravy Masala',99,'chicken')">Add to Cart</button>
+</div>
 
-    <div class="product">
-      <img src="images/paneer-masala.jpg">
-      <h3>Paneer Masala</h3>
-      <p>Creamy, bold spices made for perfect paneer dishes.</p>
-      <div class="price">₹89</div>
-      <button onclick="addToCart('Paneer Masala')">Add to Cart</button>
-    </div>
+<!-- Ginger Garlic Paste -->
+<div class="product">
+<img src="C:\Users\moham\Music\OneDrive\Desktop\images\ginger-garlic-paste.jpg.jpeg">
+<h3>Ginger Garlic Paste</h3>
+<p>Fresh paste for powerful aroma.</p>
+<div class="price">₹79</div>
+<div class="qty">
+<button onclick="changeQty('ginger',-1)">−</button>
+<span id="ginger">1</span>
+<button onclick="changeQty('ginger',1)">+</button>
+</div>
+<button class="add" onclick="addToCart('Ginger Garlic Paste',79,'ginger')">Add to Cart</button>
+</div>
 
-  </div>
+<!-- Mutton Gravy Masala -->
+<div class="product">
+<img src="C:\Users\moham\Music\OneDrive\Desktop\images\mutton-gravy-masala.jpg.jpeg">
+<h3>Mutton Gravy Masala</h3>
+<p>Bold spices for rich mutton dishes.</p>
+<div class="price">₹119</div>
+<div class="qty">
+<button onclick="changeQty('mutton',-1)">−</button>
+<span id="mutton">1</span>
+<button onclick="changeQty('mutton',1)">+</button>
+</div>
+<button class="add" onclick="addToCart('Mutton Gravy Masala',119,'mutton')">Add to Cart</button>
+</div>
 
-  <div class="cart">
-    <h2>Your Cart</h2>
-    <div id="cart">No items yet</div>
-    <br>
-    <button onclick="placeOrder()">Place Order</button>
-  </div>
+<!-- Shahi Biryani Masala -->
+<div class="product">
+<img src="C:\Users\moham\Music\OneDrive\Desktop\images\Shahi-Biryani-masala.jpg.jpeg">
+<h3>Shahi Biryani Masala</h3>
+<p>Royal blend for aromatic biryani.</p>
+<div class="price">₹129</div>
+<div class="qty">
+<button onclick="changeQty('biryani',-1)">−</button>
+<span id="biryani">1</span>
+<button onclick="changeQty('biryani',1)">+</button>
+</div>
+<button class="add" onclick="addToCart('Shahi Biryani Masala',129,'biryani')">Add to Cart</button>
+</div>
+
+</div>
+
+<div class="cart">
+<h2>Your Cart</h2>
+<div id="cart">No items yet</div>
+<h3>Total: ₹<span id="total">0</span></h3>
+<button class="add" onclick="placeOrder()">Place Order</button>
+</div>
 
 </div>
 
 <footer>
-  © 2026 Zee PureFound • Made with ❤️ for Food Lovers
+© 2026 Zee PureFound
 </footer>
 
 <script>
-let cart = [];
+let cart=[];
+let total=0;
 
-function addToCart(product) {
-  cart.push(product);
-  document.getElementById("cart").innerHTML = cart.join("<br>");
+function changeQty(id,val){
+  let el=document.getElementById(id);
+  let qty=parseInt(el.innerText)+val;
+  if(qty<1) qty=1;
+  el.innerText=qty;
 }
 
-function placeOrder() {
-  if (cart.length === 0) {
+function addToCart(name,price,id){
+  let qty=parseInt(document.getElementById(id).innerText);
+  let itemTotal=price*qty;
+  cart.push(`${name} x${qty} = ₹${itemTotal}`);
+  total+=itemTotal;
+  document.getElementById("cart").innerHTML=cart.join("<br>");
+  document.getElementById("total").innerText=total;
+}
+
+function placeOrder(){
+  if(cart.length===0){
     alert("Cart is empty");
     return;
   }
-  let formLink = "https://docs.google.com/forms/d/e/1FAIpQLScJnsb5Xrjci9XIhXz-nbsleO9uEAdFpOsWfN2nbTiA6atLWQ/viewform?usp=header";
-  window.location.href = formLink + "&entry.1234567890=" + encodeURIComponent(cart.join(", "));
+  let formLink="https://docs.google.com/forms/d/e/1FAIpQLScJnsb5Xrjci9XIhXz-nbsleO9uEAdFpOsWfN2nbTiA6atLWQ/viewform?usp=header
+";
+  let order=cart.join(", ")+" | Total ₹"+total;
+  window.location.href=formLink+"&entry.1234567890="+encodeURIComponent(order);
 }
 </script>
 
