@@ -35,8 +35,6 @@ header p{opacity:.9}
 
 .product img{width:100%;border-radius:14px}
 
-.product h3{margin:10px 0 5px}
-
 select{
   width:100%;
   padding:8px;
@@ -128,8 +126,6 @@ select{
   cursor:pointer;
   padding:2px 8px;
 }
-
-footer{text-align:center;padding:25px;font-size:13px;opacity:.7}
 </style>
 </head>
 
@@ -143,15 +139,13 @@ footer{text-align:center;padding:25px;font-size:13px;opacity:.7}
 <div class="container">
 <div class="products">
 
-<!-- PRODUCTS SAME AS YOURS (UNCHANGED) -->
-
 <!-- Ginger Garlic Paste -->
 <div class="product">
 <img src="ginger-garlic-paste.jpg.jpeg">
 <h3>Ginger Garlic Paste</h3>
 <select onchange="updateProduct(this,'gg')">
-  <option data-mrp="300" data-price="240">1 Kg – ₹240</option>
-  <option data-mrp="200" data-price="150">500 g – ₹150</option>
+  <option data-mrp="300" data-price="240">1 Kg</option>
+  <option data-mrp="200" data-price="150">500 g</option>
 </select>
 <div class="price-box">
   <span class="mrp" id="gg_mrp">₹300</span>
@@ -166,13 +160,13 @@ footer{text-align:center;padding:25px;font-size:13px;opacity:.7}
 <button class="add" onclick="addToCart('Ginger Garlic Paste','gg_price','gg')">Add to Cart</button>
 </div>
 
-<!-- Mutton -->
+<!-- Mutton Gravy Masala -->
 <div class="product">
 <img src="mutton-gravy-masala.jpg.jpeg">
 <h3>Mutton Gravy Masala</h3>
 <select onchange="updateProduct(this,'mutton')">
-  <option data-mrp="79" data-price="69">50 g – ₹69</option>
-  <option data-mrp="264" data-price="249">200 g – ₹249</option>
+  <option data-mrp="79" data-price="69">50 g</option>
+  <option data-mrp="264" data-price="249">200 g</option>
 </select>
 <div class="price-box">
   <span class="mrp" id="mutton_mrp">₹79</span>
@@ -187,13 +181,13 @@ footer{text-align:center;padding:25px;font-size:13px;opacity:.7}
 <button class="add" onclick="addToCart('Mutton Gravy Masala','mutton_price','mutton')">Add to Cart</button>
 </div>
 
-<!-- Chicken -->
+<!-- Chicken Gravy Masala -->
 <div class="product">
 <img src="chicken-gravy-masala.jpg.jpeg">
 <h3>Chicken Gravy Masala</h3>
 <select onchange="updateProduct(this,'chicken')">
-  <option data-mrp="75" data-price="65">50 g – ₹65</option>
-  <option data-mrp="264" data-price="249">200 g – ₹249</option>
+  <option data-mrp="75" data-price="65">50 g</option>
+  <option data-mrp="264" data-price="249">200 g</option>
 </select>
 <div class="price-box">
   <span class="mrp" id="chicken_mrp">₹75</span>
@@ -208,13 +202,13 @@ footer{text-align:center;padding:25px;font-size:13px;opacity:.7}
 <button class="add" onclick="addToCart('Chicken Gravy Masala','chicken_price','chicken')">Add to Cart</button>
 </div>
 
-<!-- Biryani -->
+<!-- Shahi Biryani Masala -->
 <div class="product">
 <img src="Shahi-Biryani-masala.jpg.jpeg">
 <h3>Shahi Biryani Masala</h3>
 <select onchange="updateProduct(this,'biryani')">
-  <option data-mrp="108" data-price="98">50 g – ₹98</option>
-  <option data-mrp="373" data-price="358">200 g – ₹358</option>
+  <option data-mrp="108" data-price="98">50 g</option>
+  <option data-mrp="373" data-price="358">200 g</option>
 </select>
 <div class="price-box">
   <span class="mrp" id="biryani_mrp">₹108</span>
@@ -239,8 +233,6 @@ footer{text-align:center;padding:25px;font-size:13px;opacity:.7}
 </div>
 </div>
 
-<footer>© 2026 Zee PureFound</footer>
-
 <script>
 let cart=[];
 let total=0;
@@ -262,12 +254,17 @@ function addToCart(name,priceId,qtyId){
   let price=parseInt(document.getElementById(priceId).innerText);
   let qty=parseInt(document.getElementById(qtyId).innerText);
 
-  let existing=cart.find(i=>i.name===name && i.price===price);
+  let productDiv=document.getElementById(qtyId).closest(".product");
+  let select=productDiv.querySelector("select");
+  let grams=select.options[select.selectedIndex].text;
+
+  let existing=cart.find(i=>i.name===name && i.price===price && i.grams===grams);
+
   if(existing){
     existing.qty+=qty;
     existing.total=existing.qty*existing.price;
   }else{
-    cart.push({name,price,qty,total:price*qty});
+    cart.push({name,grams,price,qty,total:price*qty});
   }
 
   document.getElementById(qtyId).innerText=1;
@@ -286,7 +283,7 @@ function renderCart(){
     total+=i.total;
     html+=`
       <div class="cart-item">
-        <span>${i.name} x${i.qty} = ₹${i.total}</span>
+        <span>${i.name} (${i.grams}) x${i.qty} = ₹${i.total}</span>
         <button class="remove" onclick="removeItem(${index})">❌</button>
       </div>`;
   });
@@ -297,10 +294,10 @@ function renderCart(){
 function placeOrder(){
   if(cart.length===0){alert("Cart is empty");return;}
 
-  let order=cart.map(i=>`${i.name} x${i.qty} = ₹${i.total}`).join(", ");
-  order+=" | Total ₹"+total;
+  let order=cart.map(i=>`${i.name} (${i.grams}) x${i.qty} = ₹${i.total}`).join(" | ");
+  order+=" | TOTAL ₹"+total;
 
-  const formLink="https://docs.google.com/forms/d/e/1FAIpQLSdJ3MBmjF6705ceNPHET7VV-clxNcYODweaPxK_1RzUqyR6fA/viewform?usp=dialog";
+  const formLink="https://docs.google.com/forms/d/e/1FAIpQLSdJ3MBmjF6705ceNPHET7VV-clxNcYODweaPxK_1RzUqyR6fA/viewform?";
   window.location.href=formLink+"&entry.2054877162="+encodeURIComponent(order);
 }
 </script>
