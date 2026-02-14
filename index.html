@@ -300,7 +300,7 @@ function placeOrder(){
   let order=cart.map(i=>`${i.name} x${i.qty} = ₹${i.total}`).join(", ");
   order+=" | Total ₹"+total;
 
-  const formLink="https://docs.google.com/forms/d/e/1FAIpQLSdJ3MBmjF6705ceNPHET7VV-clxNcYODweaPxK_1RzUqyR6fA/viewform?";
+  const formLink="https://docs.google.com/forms/d/e/1FAIpQLSdJ3MBmjF6705ceNPHET7VV-clxNcYODweaPxK_1RzUqyR6fA/viewform?usp=dialog";
   window.location.href=formLink+"&entry.2054877162="+encodeURIComponent(order);
 }
 </script>
