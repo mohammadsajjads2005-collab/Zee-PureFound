@@ -5,7 +5,7 @@
 <title>Zee PureFound – Premium Masala Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box}
@@ -15,8 +15,8 @@ body{
   background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   color:#fff;
 }
-header{text-align:center;padding:60px 20px}
-header h1{font-size:42px;margin:0}
+header{text-align:center;padding:50px 20px}
+header h1{margin:0;font-size:38px}
 header p{opacity:.9}
 
 .container{max-width:1200px;margin:auto;padding:20px}
@@ -29,14 +29,13 @@ header p{opacity:.9}
 
 .product{
   background:rgba(255,255,255,.12);
-  backdrop-filter:blur(10px);
   border-radius:18px;
   padding:15px;
 }
 
 .product img{width:100%;border-radius:14px}
 
-.product h3{margin:12px 0 5px}
+.product h3{margin:10px 0 5px}
 .product p{font-size:14px;opacity:.85}
 
 select{
@@ -44,10 +43,10 @@ select{
   padding:8px;
   border-radius:8px;
   border:none;
-  margin-top:8px;
+  margin:8px 0;
 }
 
-.price{font-size:18px;font-weight:600;margin:10px 0}
+.price{font-size:18px;font-weight:600;margin:5px 0}
 
 .qty{
   display:flex;
@@ -55,25 +54,51 @@ select{
   gap:10px;
 }
 .qty button{
-  width:32px;height:32px;border-radius:50%;
-  border:none;background:#ff9800;color:white;
-  font-size:18px;cursor:pointer;
+  width:32px;height:32px;
+  border-radius:50%;
+  border:none;
+  background:#ff9800;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
 }
 
 .add{
-  width:100%;padding:12px;border:none;border-radius:30px;
-  background:linear-gradient(135deg,#ff9800,#ff5722);
-  color:white;font-weight:600;cursor:pointer;
+  width:100%;
   margin-top:10px;
+  padding:12px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ff9800,#ff5722);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
 }
 
 .cart{
   margin-top:40px;
   background:rgba(255,255,255,.12);
-  padding:20px;border-radius:18px;
+  padding:20px;
+  border-radius:18px;
 }
 
-footer{text-align:center;padding:30px;font-size:13px;opacity:.7}
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.remove{
+  background:#ff4d4d;
+  border:none;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+  padding:2px 8px;
+}
+
+footer{text-align:center;padding:25px;font-size:13px;opacity:.7}
 </style>
 </head>
 
@@ -185,20 +210,51 @@ function updatePrice(sel,priceId){
 function addToCart(name,priceId,qtyId){
   let price=parseInt(document.getElementById(priceId).innerText);
   let qty=parseInt(document.getElementById(qtyId).innerText);
-  let itemTotal=price*qty;
 
-  cart.push(`${name} x${qty} = ₹${itemTotal}`);
-  total+=itemTotal;
+  let existing=cart.find(item=>item.name===name && item.price===price);
 
-  document.getElementById("cart").innerHTML=cart.join("<br>");
-  document.getElementById("total").innerText=total;
+  if(existing){
+    existing.qty+=qty;
+    existing.total=existing.qty*existing.price;
+  }else{
+    cart.push({name,price,qty,total:price*qty});
+  }
+
   document.getElementById(qtyId).innerText=1;
+  renderCart();
+}
+
+function removeItem(index){
+  cart.splice(index,1);
+  renderCart();
+}
+
+function renderCart(){
+  let html="";
+  total=0;
+
+  cart.forEach((item,i)=>{
+    total+=item.total;
+    html+=`
+      <div class="cart-item">
+        <span>${item.name} x${item.qty} = ₹${item.total}</span>
+        <button class="remove" onclick="removeItem(${i})">❌</button>
+      </div>
+    `;
+  });
+
+  document.getElementById("cart").innerHTML=html||"No items yet";
+  document.getElementById("total").innerText=total;
 }
 
 function placeOrder(){
   if(cart.length===0){alert("Cart is empty");return;}
-  let formLink="https://docs.google.com/forms/d/e/1FAIpQLScJnsb5Xrjci9XIhXz-nbsleO9uEAdFpOsWfN2nbTiA6atLWQ/viewform?usp=header";
-  let order=cart.join(", ")+" | Total ₹"+total;
+
+  let order=cart.map(i=>`${i.name} x${i.qty} = ₹${i.total}`).join(", ");
+  order+=" | Total ₹"+total;
+
+  const formLink="https://docs.google.com/forms/d/e/1FAIpQLScJnsb5Xrjci9XIhXz-nbsleO9uEAdFpOsWfN2nbTiA6atLWQ/viewform?usp=header"; // <-- CHANGE THIS
+
   window.location.href=formLink+"&entry.1234567890="+encodeURIComponent(order);
 }
 </script>
