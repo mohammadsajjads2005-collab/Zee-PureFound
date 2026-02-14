@@ -36,7 +36,6 @@ header p{opacity:.9}
 .product img{width:100%;border-radius:14px}
 
 .product h3{margin:10px 0 5px}
-.product p{font-size:14px;opacity:.85}
 
 select{
   width:100%;
@@ -46,7 +45,39 @@ select{
   margin:8px 0;
 }
 
-.price{font-size:18px;font-weight:600;margin:5px 0}
+.price-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:8px 0;
+}
+
+.mrp{
+  text-decoration:line-through;
+  color:#ffb3b3;
+  font-size:14px;
+}
+
+.offer{
+  font-size:20px;
+  font-weight:700;
+  color:#00ffcc;
+}
+
+.badge{
+  background:#ff004c;
+  color:white;
+  font-size:10px;
+  padding:4px 8px;
+  border-radius:20px;
+  animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.1)}
+  100%{transform:scale(1)}
+}
 
 .qty{
   display:flex;
@@ -116,11 +147,15 @@ footer{text-align:center;padding:25px;font-size:13px;opacity:.7}
 <div class="product">
 <img src="ginger-garlic-paste.jpg.jpeg">
 <h3>Ginger Garlic Paste</h3>
-<select onchange="updatePrice(this,'gg_price')">
-  <option value="240">1 Kg – ₹240</option>
-  <option value="150">500 g – ₹150</option>
+<select onchange="updateProduct(this,'gg')">
+  <option data-mrp="300" data-price="240">1 Kg – ₹240</option>
+  <option data-mrp="200" data-price="150">500 g – ₹150</option>
 </select>
-<div class="price">₹<span id="gg_price">240</span></div>
+<div class="price-box">
+  <span class="mrp" id="gg_mrp">₹300</span>
+  <span class="offer">₹<span id="gg_price">240</span></span>
+  <span class="badge">OFFER</span>
+</div>
 <div class="qty">
 <button onclick="changeQty('gg',-1)">-</button>
 <span id="gg">1</span>
@@ -133,11 +168,15 @@ footer{text-align:center;padding:25px;font-size:13px;opacity:.7}
 <div class="product">
 <img src="mutton-gravy-masala.jpg.jpeg">
 <h3>Mutton Gravy Masala</h3>
-<select onchange="updatePrice(this,'mutton_price')">
-  <option value="70">50 g – ₹70</option>
-  <option value="249">200 g – ₹249</option>
+<select onchange="updateProduct(this,'mutton')">
+  <option data-mrp="79" data-price="69">50 g – ₹69</option>
+  <option data-mrp="264" data-price="249">200 g – ₹249</option>
 </select>
-<div class="price">₹<span id="mutton_price">70</span></div>
+<div class="price-box">
+  <span class="mrp" id="mutton_mrp">₹79</span>
+  <span class="offer">₹<span id="mutton_price">69</span></span>
+  <span class="badge">OFFER</span>
+</div>
 <div class="qty">
 <button onclick="changeQty('mutton',-1)">-</button>
 <span id="mutton">1</span>
@@ -150,11 +189,15 @@ footer{text-align:center;padding:25px;font-size:13px;opacity:.7}
 <div class="product">
 <img src="chicken-gravy-masala.jpg.jpeg">
 <h3>Chicken Gravy Masala</h3>
-<select onchange="updatePrice(this,'chicken_price')">
-  <option value="65">50 g – ₹65</option>
-  <option value="249">200 g – ₹249</option>
+<select onchange="updateProduct(this,'chicken')">
+  <option data-mrp="75" data-price="65">50 g – ₹65</option>
+  <option data-mrp="264" data-price="249">200 g – ₹249</option>
 </select>
-<div class="price">₹<span id="chicken_price">65</span></div>
+<div class="price-box">
+  <span class="mrp" id="chicken_mrp">₹75</span>
+  <span class="offer">₹<span id="chicken_price">65</span></span>
+  <span class="badge">OFFER</span>
+</div>
 <div class="qty">
 <button onclick="changeQty('chicken',-1)">-</button>
 <span id="chicken">1</span>
@@ -167,11 +210,15 @@ footer{text-align:center;padding:25px;font-size:13px;opacity:.7}
 <div class="product">
 <img src="Shahi-Biryani-masala.jpg.jpeg">
 <h3>Shahi Biryani Masala</h3>
-<select onchange="updatePrice(this,'biryani_price')">
-  <option value="98">50 g – ₹98</option>
-  <option value="358">200 g – ₹358</option>
+<select onchange="updateProduct(this,'biryani')">
+  <option data-mrp="108" data-price="98">50 g – ₹98</option>
+  <option data-mrp="373" data-price="358">200 g – ₹358</option>
 </select>
-<div class="price">₹<span id="biryani_price">98</span></div>
+<div class="price-box">
+  <span class="mrp" id="biryani_mrp">₹108</span>
+  <span class="offer">₹<span id="biryani_price">98</span></span>
+  <span class="badge">OFFER</span>
+</div>
 <div class="qty">
 <button onclick="changeQty('biryani',-1)">-</button>
 <span id="biryani">1</span>
@@ -203,16 +250,17 @@ function changeQty(id,val){
   el.innerText=q;
 }
 
-function updatePrice(sel,priceId){
-  document.getElementById(priceId).innerText=sel.value;
+function updateProduct(sel,id){
+  let opt=sel.options[sel.selectedIndex];
+  document.getElementById(id+"_price").innerText=opt.dataset.price;
+  document.getElementById(id+"_mrp").innerText="₹"+opt.dataset.mrp;
 }
 
 function addToCart(name,priceId,qtyId){
   let price=parseInt(document.getElementById(priceId).innerText);
   let qty=parseInt(document.getElementById(qtyId).innerText);
 
-  let existing=cart.find(item=>item.name===name && item.price===price);
-
+  let existing=cart.find(i=>i.name===name && i.price===price);
   if(existing){
     existing.qty+=qty;
     existing.total=existing.qty*existing.price;
@@ -224,37 +272,32 @@ function addToCart(name,priceId,qtyId){
   renderCart();
 }
 
-function removeItem(index){
-  cart.splice(index,1);
+function removeItem(i){
+  cart.splice(i,1);
   renderCart();
 }
 
 function renderCart(){
   let html="";
   total=0;
-
-  cart.forEach((item,i)=>{
-    total+=item.total;
+  cart.forEach((i,index)=>{
+    total+=i.total;
     html+=`
       <div class="cart-item">
-        <span>${item.name} x${item.qty} = ₹${item.total}</span>
-        <button class="remove" onclick="removeItem(${i})">❌</button>
-      </div>
-    `;
+        <span>${i.name} x${i.qty} = ₹${i.total}</span>
+        <button class="remove" onclick="removeItem(${index})">❌</button>
+      </div>`;
   });
-
   document.getElementById("cart").innerHTML=html||"No items yet";
   document.getElementById("total").innerText=total;
 }
 
 function placeOrder(){
   if(cart.length===0){alert("Cart is empty");return;}
-
   let order=cart.map(i=>`${i.name} x${i.qty} = ₹${i.total}`).join(", ");
   order+=" | Total ₹"+total;
 
-  const formLink="https://docs.google.com/forms/d/e/1FAIpQLScJnsb5Xrjci9XIhXz-nbsleO9uEAdFpOsWfN2nbTiA6atLWQ/viewform?usp=header"; // <-- CHANGE THIS
-
+  const formLink="https://docs.google.com/forms/d/e/1FAIpQLSdJ3MBmjF6705ceNPHET7VV-clxNcYODweaPxK_1RzUqyR6fA/viewform?usp=publish-editor"; // <-- replace
   window.location.href=formLink+"&entry.1234567890="+encodeURIComponent(order);
 }
 </script>
