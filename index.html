@@ -138,7 +138,7 @@ footer{
 <p>Restaurant-style chicken curry spices.</p>
 <div class="price">₹99</div>
 <div class="qty">
-<button onclick="changeQty('chicken',-1)">−</button>
+<button onclick="changeQty('chicken',-1)">-</button>
 <span id="chicken">1</span>
 <button onclick="changeQty('chicken',1)">+</button>
 </div>
@@ -152,7 +152,7 @@ footer{
 <p>Fresh paste for powerful aroma.</p>
 <div class="price">₹79</div>
 <div class="qty">
-<button onclick="changeQty('ginger',-1)">−</button>
+<button onclick="changeQty('ginger',-1)">-</button>
 <span id="ginger">1</span>
 <button onclick="changeQty('ginger',1)">+</button>
 </div>
@@ -166,7 +166,7 @@ footer{
 <p>Bold spices for rich mutton dishes.</p>
 <div class="price">₹119</div>
 <div class="qty">
-<button onclick="changeQty('mutton',-1)">−</button>
+<button onclick="changeQty('mutton',-1)">-</button>
 <span id="mutton">1</span>
 <button onclick="changeQty('mutton',1)">+</button>
 </div>
@@ -180,7 +180,7 @@ footer{
 <p>Royal blend for aromatic biryani.</p>
 <div class="price">₹129</div>
 <div class="qty">
-<button onclick="changeQty('biryani',-1)">−</button>
+<button onclick="changeQty('biryani',-1)">-</button>
 <span id="biryani">1</span>
 <button onclick="changeQty('biryani',1)">+</button>
 </div>
@@ -203,34 +203,44 @@ footer{
 </footer>
 
 <script>
-let cart=[];
-let total=0;
+let cart = [];
+let total = 0;
 
-function changeQty(id,val){
-  let el=document.getElementById(id);
-  let qty=parseInt(el.innerText)+val;
-  if(qty<1) qty=1;
-  el.innerText=qty;
+function changeQty(id, value) {
+  const qtyEl = document.getElementById(id);
+  let qty = parseInt(qtyEl.innerText, 10);
+
+  qty = qty + value;
+  if (qty < 1) qty = 1;
+
+  qtyEl.innerText = qty;
 }
 
-function addToCart(name,price,id){
-  let qty=parseInt(document.getElementById(id).innerText);
-  let itemTotal=price*qty;
-  cart.push(`${name} x${qty} = ₹${itemTotal}`);
-  total+=itemTotal;
-  document.getElementById("cart").innerHTML=cart.join("<br>");
-  document.getElementById("total").innerText=total;
+function addToCart(name, price, id) {
+  const qty = parseInt(document.getElementById(id).innerText, 10);
+  const itemTotal = price * qty;
+
+  cart.push(`${name} x ${qty} = ₹${itemTotal}`);
+  total += itemTotal;
+
+  document.getElementById("cart").innerHTML = cart.join("<br>");
+  document.getElementById("total").innerText = total;
+
+  // reset quantity back to 1
+  document.getElementById(id).innerText = 1;
 }
 
-function placeOrder(){
-  if(cart.length===0){
-    alert("Cart is empty");
+function placeOrder() {
+  if (cart.length === 0) {
+    alert("Your cart is empty");
     return;
   }
-  let formLink="https://docs.google.com/forms/d/e/1FAIpQLScJnsb5Xrjci9XIhXz-nbsleO9uEAdFpOsWfN2nbTiA6atLWQ/viewform?usp=header
-";
-  let order=cart.join(", ")+" | Total ₹"+total;
-  window.location.href=formLink+"&entry.1234567890="+encodeURIComponent(order);
+
+  const orderText = cart.join(", ") + " | Total ₹" + total;
+  const formLink = "https://docs.google.com/forms/d/e/1FAIpQLScJnsb5Xrjci9XIhXz-nbsleO9uEAdFpOsWfN2nbTiA6atLWQ/viewform?usp=header";
+
+  window.location.href =
+    formLink + "&entry.1234567890=" + encodeURIComponent(orderText);
 }
 </script>
 
