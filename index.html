@@ -4,45 +4,52 @@
 <meta charset="UTF-8">
 <title>Zee PureFound – Premium Masala Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-  margin:0;
   font-family:'Poppins',sans-serif;
-  background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#1c1c1c);
-  background-size:400% 400%;
-  animation:gradientBG 12s ease infinite;
+  background:#0f0f0f;
   color:#fff;
   overflow-x:hidden;
 }
 
-@keyframes gradientBG{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+/* Floating Gradient Blobs */
+body::before, body::after{
+  content:"";
+  position:fixed;
+  width:500px;height:500px;
+  border-radius:50%;
+  filter:blur(120px);
+  z-index:-1;
+  animation:float 12s infinite alternate ease-in-out;
+}
+body::before{
+  background:#ff00cc55;
+  top:-150px; left:-150px;
+}
+body::after{
+  background:#00f7ff55;
+  bottom:-150px; right:-150px;
+}
+
+@keyframes float{
+  from{transform:translate(0,0)}
+  to{transform:translate(80px,60px)}
 }
 
 header{
   text-align:center;
-  padding:60px 20px;
-  animation:fadeDown 1.2s ease;
-}
-
-@keyframes fadeDown{
-  from{opacity:0; transform:translateY(-40px)}
-  to{opacity:1; transform:translateY(0)}
+  padding:80px 20px;
 }
 
 header h1{
-  margin:0;
-  font-size:42px;
-  letter-spacing:1px;
+  font-size:48px;
+  background:linear-gradient(90deg,#ff00cc,#00f7ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
-
-header p{opacity:.85}
 
 .container{
   max-width:1200px;
@@ -53,36 +60,32 @@ header p{opacity:.85}
 .products{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;
+  gap:35px;
 }
 
 .product{
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(15px);
-  border-radius:20px;
-  padding:18px;
-  transition:.4s ease;
-  animation:fadeUp 1s ease;
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(20px);
+  border-radius:25px;
+  padding:20px;
+  transition:transform .2s ease;
+  transform-style:preserve-3d;
+  animation:fadeUp .8s ease forwards;
+  opacity:0;
 }
 
 @keyframes fadeUp{
-  from{opacity:0; transform:translateY(40px)}
   to{opacity:1; transform:translateY(0)}
-}
-
-.product:hover{
-  transform:translateY(-12px) scale(1.02);
-  box-shadow:0 15px 35px rgba(0,0,0,.6);
 }
 
 .product img{
   width:100%;
-  border-radius:14px;
+  border-radius:15px;
   transition:.4s;
 }
 
 .product:hover img{
-  transform:scale(1.05);
+  transform:scale(1.08);
 }
 
 select{
@@ -90,8 +93,9 @@ select{
   padding:10px;
   border-radius:10px;
   border:none;
-  margin:10px 0;
-  font-weight:600;
+  margin:12px 0;
+  background:#1c1c1c;
+  color:#fff;
 }
 
 .price-box{
@@ -103,43 +107,42 @@ select{
 
 .mrp{
   text-decoration:line-through;
-  color:#ff9c9c;
-  font-size:14px;
+  color:#999;
 }
 
 .offer{
   font-size:22px;
   font-weight:700;
-  color:#00ffcc;
-  text-shadow:0 0 10px rgba(0,255,204,.6);
+  background:linear-gradient(90deg,#00f7ff,#ff00cc);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
 .badge{
-  background:#ff004c;
-  color:white;
-  font-size:11px;
+  background:linear-gradient(90deg,#ff00cc,#ff4ecd);
+  font-size:10px;
   padding:5px 10px;
   border-radius:20px;
-  animation:pulse 1.2s infinite;
+  animation:pulse 1.4s infinite;
 }
 
 @keyframes pulse{
   0%{transform:scale(1)}
-  50%{transform:scale(1.1)}
+  50%{transform:scale(1.15)}
   100%{transform:scale(1)}
 }
 
 .qty{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:10px;
 }
 
 .qty button{
   width:34px;height:34px;
   border-radius:50%;
   border:none;
-  background:linear-gradient(135deg,#ff9800,#ff5722);
+  background:linear-gradient(135deg,#00f7ff,#ff00cc);
   color:white;
   font-size:18px;
   cursor:pointer;
@@ -152,51 +155,54 @@ select{
 
 .add{
   width:100%;
-  margin-top:12px;
+  margin-top:15px;
   padding:14px;
   border:none;
-  border-radius:30px;
-  background:linear-gradient(135deg,#ff9800,#ff5722);
+  border-radius:40px;
+  background:linear-gradient(135deg,#00f7ff,#ff00cc);
   color:white;
   font-weight:600;
   cursor:pointer;
-  transition:.4s;
+  transition:.3s;
 }
 
 .add:hover{
-  transform:translateY(-3px);
-  box-shadow:0 10px 20px rgba(255,87,34,.5);
+  transform:translateY(-5px);
+  box-shadow:0 15px 30px rgba(255,0,200,.5);
 }
 
 .cart{
-  margin-top:50px;
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(15px);
-  padding:25px;
-  border-radius:20px;
-  animation:fadeUp 1.4s ease;
+  margin-top:60px;
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(20px);
+  padding:30px;
+  border-radius:25px;
 }
 
 .cart-item{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
+  margin-bottom:12px;
+  animation:fadeCart .4s ease;
+}
+
+@keyframes fadeCart{
+  from{opacity:0; transform:translateX(-20px)}
+  to{opacity:1; transform:translateX(0)}
 }
 
 .remove{
-  background:#ff4d4d;
+  background:#ff00cc;
   border:none;
-  color:white;
-  border-radius:6px;
+  padding:6px 10px;
+  border-radius:8px;
   cursor:pointer;
-  padding:4px 10px;
   transition:.3s;
 }
 
 .remove:hover{
+  background:#ff0080;
   transform:scale(1.1);
-  background:#ff1a1a;
 }
 </style>
 </head>
@@ -336,6 +342,23 @@ Add to Cart
 let cart=[];
 let total=0;
 
+/* 3D Tilt Effect */
+document.querySelectorAll('.product').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const rect=card.getBoundingClientRect();
+    const x=e.clientX-rect.left;
+    const y=e.clientY-rect.top;
+    const centerX=rect.width/2;
+    const centerY=rect.height/2;
+    const rotateX=((y-centerY)/20);
+    const rotateY=((centerX-x)/20);
+    card.style.transform=`rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform="rotateX(0) rotateY(0)";
+  });
+});
+
 function changeQty(id,val){
   let el=document.getElementById(id);
   let q=parseInt(el.innerText)+val;
@@ -352,20 +375,16 @@ function updateProduct(sel,id){
 function addToCart(name,priceId,qtyId){
   let price=parseInt(document.getElementById(priceId).innerText);
   let qty=parseInt(document.getElementById(qtyId).innerText);
-
   let productDiv=document.getElementById(qtyId).closest(".product");
   let select=productDiv.querySelector("select");
   let grams=select.options[select.selectedIndex].text;
-
   let existing=cart.find(i=>i.name===name && i.price===price && i.grams===grams);
-
   if(existing){
     existing.qty+=qty;
     existing.total=existing.qty*existing.price;
   }else{
     cart.push({name,grams,price,qty,total:price*qty});
   }
-
   document.getElementById(qtyId).innerText=1;
   renderCart();
 }
@@ -392,14 +411,11 @@ function renderCart(){
 
 function placeOrder(){
   if(cart.length===0){alert("Cart is empty");return;}
-
   let order=cart.map(i=>`${i.name} (${i.grams}) x${i.qty} = ₹${i.total}`).join(" | ");
   order+=" | TOTAL ₹"+total;
-
   const formLink="https://docs.google.com/forms/d/e/1FAIpQLSdJ3MBmjF6705ceNPHET7VV-clxNcYODweaPxK_1RzUqyR6fA/viewform?";
   window.location.href=formLink+"&entry.2054877162="+encodeURIComponent(order);
 }
 </script>
-
 </body>
 </html>
